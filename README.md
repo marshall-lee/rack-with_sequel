@@ -1,6 +1,8 @@
 # Rack::WithSequel
 
-Rack middleware that explicitely acquires Sequel database connection for entire request. It's reasonable if you want a Rails-like behaviour where database connection is released by the `ActiveRecord::ConnectionAdapters::ConnectionManagement` middleware at the end of request. But please use it with **warning** that using `Rack::WithSequel` you get **every** request locking one connection from pool even if database is not used during this request.
+Rack middleware that explicitely acquires a Sequel database connection for entire request. It's reasonable if you want a Rails-like behaviour where database connection is released by the `ActiveRecord::ConnectionAdapters::ConnectionManagement` middleware at the end of request.
+
+But please use it with **warning** that using `Rack::WithSequel` you'll get **every** request locking one connection from the pool even if database is not used during this request (for example, Rails acquires a connection only when it's needed).
 
 ## Installation
 
